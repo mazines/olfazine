@@ -15,7 +15,7 @@ for (const mode of ['public', 'owner']) {
   console.log('gaps', m.gaps.join(','));
   console.log('try', m.tryList.map(t => t.redacted ? `REDACTED(${t.kind})` : t.kind === 'group' ? t.title + ': ' + t.members.map(x => x.name).join(' + ') : t.fragrance.name).join(' | '));
   const yrs = m.years.map(y => y.year);
-  ok(JSON.stringify(yrs) === '[2026,2025,2024,2020,2019,2018,2017]', 'years newest first, no 2021-2023');
+  ok(JSON.stringify(yrs) === '[2026,2025,2024,2023,2022,2020,2019,2018,2017]', 'years newest first, no invented 2021');
   const bo = y => m.years.find(x => x.year === y).entries.filter(e => !e.redacted && e.fragrance.name === 'Black Orchid').length;
   ok(bo(2018) === 1 && bo(2019) === 1 && bo(2020) === 1, 'Black Orchid once in each of 2018, 2019, 2020');
   const json = JSON.stringify(m);
@@ -23,6 +23,9 @@ for (const mode of ['public', 'owner']) {
     ok(!/MYSLF|Homme Id|Angels|Sun Bleached|Tuxedo/i.test(json), 'public model has no private identity');
     ok(m.tryList.length === 3 && m.tryList.every(t => t.redacted), 'every To try tile redacted in public');
     ok(m.years.find(y => y.year === 2025).entries.every(e => e.redacted), 'all of 2025 redacted in public');
+    const cur = m.years.find(y => y.year === new Date().getFullYear());
+    ok(!cur || cur.entries.every(e => e.redacted), 'current year always redacted in public');
+    ok(!/Aventus/.test(json), 'current-year fragrance (Aventus) absent from public model');
   } else {
     ok(/MYSLF/.test(json) && /Tuxedo/.test(json), 'owner sees private entries');
     const sb = m.tryList.find(t => t.key === 'w-sun-bleached');

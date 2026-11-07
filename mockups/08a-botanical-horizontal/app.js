@@ -6,7 +6,8 @@
 (function () {
   "use strict";
   const O = window.Olf, esc = O.esc, BT = window.OLF_BT;
-  const phone = window.matchMedia("(max-width: 899px)");
+  // Below 1200px nine-plus year columns get too narrow: use the vertical tree.
+  const phone = window.matchMedia("(max-width: 1199px)");
 
   // Notes hang from one horizontal stem, each on its own short twig. Tiers only when the source gives them.
   function leafRow(f, names) {

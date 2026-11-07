@@ -128,3 +128,16 @@ button.bh-twig-btn:hover .bh-name { text-decoration: underline; text-decoration-
   .olf-nav { width: 100%; }
   .olf-nav .olf-switch { flex: 1; }
 }
+
+/* Many year columns: use the full width, hang the bottle above the name, never break inside a word. */
+@media (min-width: 1200px) {
+  .olf-header, .olf-main { max-width: none; }
+  .bh-trunk { column-gap: 10px; }
+  .bh-twigs > .bh-twig .bh-twig-btn { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .bh-twig .bt-bud { width: auto; justify-content: flex-start; }
+  .bh-twig .bt-bud .olf-bottle { width: 30px; height: 42px; }
+  .bh-name, .bh-ttext .bt-by { overflow-wrap: normal; word-break: normal; hyphens: manual; }
+  .bh-twig .bt-by { letter-spacing: .06em; font-size: 13px; }
+  .bh-twig-redacted .bh-name { letter-spacing: .04em; font-size: 12px; }
+  .bh-year-num { font-size: 26px; }
+}

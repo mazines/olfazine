@@ -128,7 +128,7 @@
       memory: "During COVID",
       sourceNote: "Corrected to during COVID. Shown at year precision." },
     { id: "h-invictus-victory", fragrance: "paco-invictus-victory",
-      periods: [{ start: { y: 2024, m: 1 }, end: { y: 2024, m: 6 } }],
+      periods: [{ start: { y: 2022 }, end: { y: 2024 } }],
       memory: "Senior Year of College, 1st year post-college",
       sourceNote: "Senior Year of College, 1st year post-college (original note)" },
     { id: "h-phantom", fragrance: "paco-phantom",

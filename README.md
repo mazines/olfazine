@@ -10,7 +10,7 @@ It's a static site with no build step, framework or backend. GitHub Pages serves
 
 | Path | What it shows |
 |---|---|
-| `/` | The public journal. Fragrances marked private show as REDACTED. |
+| `/` | The public journal. Fragrances marked private, and anything worn in the current calendar year, show as REDACTED. |
 | `/admin/` | Every fragrance by name, with a Private badge on the hidden ones. It is not linked from the public page and is marked `noindex`. |
 
 > `/admin/` is not access control. All data ships in `mockups/shared/data.js`, so anyone who reads the source can see every entry. Real privacy comes with the Firebase phase ([docs/next-phase-firebase.md](docs/next-phase-firebase.md)).
@@ -39,6 +39,7 @@ Open `index.html` in a browser. No server is needed. To view the concept gallery
   - `ongoing: true` must be set explicitly.
   - Year-only periods never show as January–December.
 - To hide a fragrance on the public page, add `private: true` to its catalog record. It then shows as REDACTED in every year and view.
+- Current-year rule: the public page always hides fragrances worn in the current calendar year, in every year they appear in. It uses the visitor's clock, so the hidden year rolls over automatically on January 1.
 - On a To try tile, `wearWith: ["<catalog id>"]` adds a "Wear together with …" note.
 
 ## Refresh Fragella data

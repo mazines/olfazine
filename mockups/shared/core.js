@@ -253,16 +253,25 @@
     redactCounter = 0;
     const pub = isPublic(mode);
 
+    // Public view hides private fragrances and anything worn in the current calendar year.
+    // A fragrance that touches the current year is hidden in every year, so its dates cannot leak it.
+    const thisYear = new Date().getFullYear();
+    function hidden(h, f) {
+      if (f.private) return true;
+      return h.periods.some(function (p) { return periodYears(p).indexOf(thisYear) !== -1; });
+    }
+
     // History: one row per fragrance per year. Separate intervals stay in details.
     const byYear = {};
     D.history.forEach(function (h) {
       const f = D.catalog[h.fragrance];
+      const isHidden = hidden(h, f);
       const years = {};
       h.periods.forEach(function (p) { periodYears(p).forEach(function (y) { years[y] = true; }); });
       Object.keys(years).forEach(function (yStr) {
         const y = Number(yStr);
         byYear[y] = byYear[y] || [];
-        if (pub && f.private) {
+        if (pub && isHidden) {
           // Only the year and a generic placeholder are public.
           byYear[y].push({ redacted: true, key: opaque("r" + y), year: y });
           return;
@@ -271,7 +280,7 @@
           redacted: false,
           key: h.id,
           year: y,
-          private: !!f.private,
+          private: isHidden,
           synthetic: !!f.synthetic,
           fragrance: fullFragrance(h.fragrance),
           periods: h.periods.map(function (p) {
@@ -382,10 +391,8 @@
     return out;
   }
 
-  function editButton(label) {
-    if (window.OLF_PRODUCTION) return "";
-    return '<button type="button" class="olf-edit" data-olf-edit>' + esc(label || "Edit") + "</button>";
-  }
+  // View-only journal: no edit controls.
+  function editButton() { return ""; }
 
   // ---------- state ----------
   // Survives tab switches and mode changes. Seeded from the URL so screenshots match across concepts.

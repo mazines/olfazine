@@ -9,7 +9,7 @@ const concepts = process.argv.slice(2).length
   ? process.argv.slice(2)
   : fs.readdirSync(root).filter(d => /^\d\d[a-z]?-/.test(d)).sort();
 
-const PRIVATE = /MYSLF|Homme Id|Angels|Sun Bleached|Tuxedo/;
+const PRIVATE = /MYSLF|Homme Id|Angels|Sun Bleached|Tuxedo|Aventus/;
 let failures = 0;
 
 async function load(concept, search = '') {
@@ -49,7 +49,8 @@ for (const c of concepts) {
     ok(errors.length === 0, 'no script errors' + (errors.length ? ': ' + errors.join(' | ') : ''));
     const hist = d.getElementById('olf-panel-history'), tryP = d.getElementById('olf-panel-try');
     ok(hist && !hist.hidden && tryP && tryP.hidden, 'History visible first, To try hidden');
-    ok(hist.textContent.includes('Aventus'), 'latest year (2026) expanded by default');
+    ok(d.querySelector('[data-olf-year="2026"]')?.getAttribute('aria-expanded') === 'true', 'latest year (2026) expanded by default');
+    ok(!hist.textContent.includes('Aventus') && /REDACTED/.test(hist.textContent), 'current year (2026) redacted in public');
 
     // Year expansion
     const y2020 = d.querySelector('[data-olf-year="2020"]');
@@ -74,7 +75,7 @@ for (const c of concepts) {
       const rows2020 = d.querySelectorAll('[data-olf-entry^="2020:h-black-orchid"]');
       ok(new Set([...rows2020].map(r => r.dataset.olfEntry)).size === 1, 'Black Orchid appears once in 2020');
     }
-    ok(!d.querySelector('[data-olf-year="2021"],[data-olf-year="2022"],[data-olf-year="2023"]'), 'no invented 2021-2023 year controls');
+    ok(!d.querySelector('[data-olf-year="2021"]'), 'no invented 2021 year control');
 
     // Tab switch preserves state
     const tabTry = d.querySelector('[data-olf-view="try"]');
@@ -97,6 +98,7 @@ for (const c of concepts) {
     // Owner view
     click(d.querySelector('.olf-demo [data-olf-mode="owner"]'));
     ok(/MYSLF/.test(d.getElementById('olf-panel-history').textContent), 'owner sees private entry name in 2025');
+    if (c.startsWith('08')) ok(/Aventus/.test(d.getElementById('olf-panel-history').textContent), 'owner sees current-year entry (Aventus)');
     ok(/Private/.test(d.getElementById('olf-root').textContent), 'owner sees Private badge');
     click(d.querySelector('[data-olf-view="try"]'));
     const tux = d.querySelector('[data-olf-try="w-tuxedo"]');
