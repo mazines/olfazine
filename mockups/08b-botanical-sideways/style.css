@@ -1,0 +1,95 @@
+/* 08b Botanical tree, sideways growth. Layers on 08's stylesheet (same palette and type).
+ * Bracket stems: each row draws its share of the vertical stem (::before) and its twig (::after).
+ * Every twig sits 26px below its row's top, so year line, fragrance twig, and first leaf line up.
+ */
+.olf-header, .olf-main { max-width: 1320px; }
+:root { --twig-y: 26px; --year-col: 160px; --cell-col: 300px; --leaf-col: 210px; --reach: 28px; }
+
+/* ---------- trunk: runs down the left and off the bottom of the page ---------- */
+.bs-trunk { position: relative; list-style: none; margin: 0; padding: 0; }
+.bs-trunk::before { content: ""; position: absolute; left: 21px; top: var(--twig-y); bottom: -120px; border-left: 1.5px solid var(--stem); }
+.bs-year { position: relative; display: grid; grid-template-columns: var(--year-col) minmax(0, 1fr); align-items: start; padding-bottom: 14px; }
+.bs-year-h { position: relative; margin: 0; font-weight: normal; }
+.bs-year.is-open .bs-year-h::after,
+.bs-year.is-open > .bs-seed-node::after {
+  content: ""; position: absolute; right: 0; top: var(--twig-y); width: 26px; border-top: 1.4px solid var(--stem);
+}
+.bs-node {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; margin: 0;
+  padding: 0 10px 0 0; border: 0; border-radius: 6px; background: none; color: var(--olf-fg); cursor: pointer; text-align: left;
+}
+.bs-year.is-open .bt-knot { background: var(--olf-fg); box-shadow: 0 0 0 4px var(--olf-bg), 0 0 0 5px var(--stem); }
+.bs-year-num { font-size: 30px; line-height: 1; font-variant-numeric: oldstyle-nums; }
+button.bs-node:hover .bs-year-num { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.bs-seed-node { cursor: default; }
+.bs-seed-node .bt-knot-seed { margin-left: 15px; }
+.bs-seed-title { font-size: 26px; font-variant: small-caps; letter-spacing: .05em; }
+
+/* ---------- bracket rows (fragrances, members, leaves) ---------- */
+.bs-branches, .bs-members, .bs-leaves { list-style: none; margin: 0; padding: 0; }
+.bs-branch, .bs-member, .bs-leaf { position: relative; padding-left: var(--reach); }
+.bs-branch::before, .bs-member::before, .bs-leaf::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1.4px solid var(--stem);
+}
+.bs-branch:first-child::before, .bs-member:first-child::before, .bs-leaf:first-child::before { top: var(--twig-y); }
+.bs-branch:last-child::before, .bs-member:last-child::before, .bs-leaf:last-child::before { bottom: auto; height: var(--twig-y); }
+.bs-branch:first-child:last-child::before, .bs-member:first-child:last-child::before, .bs-leaf:first-child:last-child::before { display: none; }
+.bs-branch::after, .bs-member::after, .bs-leaf::after {
+  content: ""; position: absolute; left: 0; top: var(--twig-y); width: calc(var(--reach) - 4px); border-top: 1.4px solid var(--stem);
+}
+.bs-uncertain::after { border-top-style: dashed; }
+
+/* fragrance row: cell, then (when open) its growth to the right */
+.bs-branch { display: grid; grid-template-columns: var(--cell-col) minmax(0, 1fr); align-items: start; }
+.bs-cell {
+  position: relative; display: flex; align-items: flex-start; gap: 10px; width: 100%; min-height: 52px;
+  padding: 8px 8px 10px 4px; border: 1px solid transparent; border-radius: 6px; background: none; color: var(--olf-fg); cursor: pointer; text-align: left;
+}
+button.bs-cell:hover .bs-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.bs-branch.is-open > .bs-cell { border-color: var(--stem); background: rgba(255, 253, 245, .6); }
+.bs-cell .bt-bud { width: 26px; }
+.bs-text { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.bs-name { font-size: 19px; line-height: 1.25; overflow-wrap: break-word; }
+.bs-whens { display: flex; flex-wrap: wrap; gap: 2px 10px; font-size: 15px; }
+.bs-when-year { font-style: italic; }
+.bs-redacted .bs-name { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; color: var(--olf-muted); }
+
+/* growth: leaves column + detail card, joined to the cell by one twig */
+.bs-growth { position: relative; display: grid; grid-template-columns: var(--leaf-col) minmax(0, 1fr); gap: 0 18px; padding-left: var(--reach); align-items: start; }
+.bs-growth::before { content: ""; position: absolute; left: 0; top: var(--twig-y); width: var(--reach); border-top: 1.4px solid var(--stem); }
+.bs-leafcol { min-width: 0; padding-bottom: 12px; }
+.bs-leaf { display: flex; align-items: center; gap: 10px; min-height: 52px; min-width: 0; }
+.bs-leaf-label { font-size: 16px; line-height: 1.25; min-width: 0; overflow-wrap: break-word; }
+.bs-leaves.bs-bare .bs-leaf { gap: 12px; }
+.bs-bud-closed { flex: none; width: 12px; height: 12px; border-radius: 50%; border: 1.4px dashed var(--stem); }
+.bs-leaves.bs-bare .olf-empty { font-size: 15px; font-style: italic; }
+.bs-leafcol .olf-caveat { padding-left: var(--reach); }
+
+.bs-card {
+  display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 18px; min-width: 0; margin-bottom: 16px;
+  padding: 16px 18px; border: 1px solid var(--olf-line); border-radius: 3px; background: rgba(255, 253, 245, .6);
+}
+.bs-card-body { min-width: 0; }
+.bs-h { margin: 12px 0 4px; font-weight: normal; font-size: 17px; color: var(--sepia); }
+.bs-card-body > .bs-h:first-of-type, .bs-card-body > .bt-badges + .bs-h { margin-top: 0; }
+.bs-links .olf-links { margin-top: 14px; }
+
+/* To try: one branch forking into two members, each leafing out */
+.bs-fork { display: block; }
+.bs-fork > .bt-owner { margin: 4px 0 12px var(--reach); }
+.bs-member { padding-bottom: 6px; }
+.bs-member-head { display: flex; align-items: flex-start; gap: 10px; min-height: 52px; padding: 8px 0 4px; }
+.bs-member-head .bs-name { font-size: 18px; }
+.bs-growth-member { padding-left: 13px; }
+.bs-growth-member::before { display: none; }
+.bs-growth-member .bs-leaf:first-child::before { top: 0; }
+.bs-growth-member .bs-leaf:first-child:last-child::before { display: block; bottom: auto; height: var(--twig-y); }
+
+@media (max-width: 1180px) {
+  :root { --year-col: 132px; --cell-col: 240px; --leaf-col: 180px; }
+  .bs-year-num { font-size: 26px; }
+  .bs-name { font-size: 17px; }
+  .bs-card { grid-template-columns: minmax(0, 1fr); }
+  .bs-card .bt-fig { text-align: left; }
+  .bs-card .bt-fig svg { width: 64px; }
+}

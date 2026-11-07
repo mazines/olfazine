@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Olfazine · matched screenshots</title>
+  <link rel="stylesheet" href="gallery.css" />
+  <style>
+    .c-table { display: grid; gap: 24px; }
+    .c-row { background: #fff; border: 1px solid #d3d0c8; border-radius: 14px; padding: 14px; }
+    .c-row h2 { margin: 0 0 10px; font: 400 20px/1.2 "Iowan Old Style", Georgia, serif; }
+    .c-shots { display: grid; grid-template-columns: 3.7fr 1fr; gap: 12px; align-items: start; }
+    .c-shots img { width: 100%; display: block; border: 1px solid #cfcbc2; border-radius: 6px; }
+    .c-shots figcaption { font: 11px ui-monospace, Menlo, monospace; color: #6a665e; margin-bottom: 4px; }
+    figure { margin: 0; }
+    @media (max-width: 760px) { .c-shots { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="g-head" style="position: static">
+    <div>
+      <p class="g-kicker">Olfazine · Phase 1 · <a href="index.html">back to live gallery</a></p>
+      <h1>Matched screenshots</h1>
+      <p class="g-lede">Same state in every concept, captured with native WebKit at 1440×1000 and 390×844.</p>
+    </div>
+    <form class="g-controls" aria-label="State">
+      <fieldset>
+        <legend>State</legend>
+        <label><input type="radio" name="s" value="history" checked /> History · 2020 · Black Orchid</label>
+        <label><input type="radio" name="s" value="try" /> To try · Wear together</label>
+        <label><input type="radio" name="s" value="redacted" /> Public · 2019 · REDACTED</label>
+        <label><input type="radio" name="s" value="owner" /> Owner · private entry</label>
+      </fieldset>
+    </form>
+  </header>
+  <main><div class="c-table" id="t"></div></main>
+  <script>
+    const concepts = [["01", "Journal spine"], ["02", "Centerline chronology"], ["03", "Collection explorer"], ["04", "Annual bottle shelves"],
+      ["05", "Photographic contact sheet"], ["06", "Fragrance index"], ["07", "Editorial folios"], ["08", "Botanical tree"],
+      ["08a", "Botanical tree · horizontal trunk"], ["08b", "Botanical tree · sideways growth"], ["09", "Yearly card stacks"], ["10", "Wearing-period atlas"]];
+    const form = document.querySelector("form"), t = document.getElementById("t");
+    function render() {
+      const s = form.s.value;
+      t.innerHTML = concepts.map(function (c) {
+        const n = c[0], name = c[1];
+        return '<section class="c-row"><h2>' + n + " " + name + '</h2><div class="c-shots">' +
+          '<figure><figcaption>1440×1000</figcaption><img loading="lazy" src="screenshots/' + n + "-" + s + '-desktop.png" alt="' + n + " " + name + ', desktop, ' + s + '"></figure>' +
+          '<figure><figcaption>390×844</figcaption><img loading="lazy" src="screenshots/' + n + "-" + s + '-mobile.png" alt="' + n + " " + name + ', mobile, ' + s + '"></figure>' +
+          "</div></section>";
+      }).join("");
+    }
+    form.addEventListener("change", render);
+    render();
+  </script>
+</body>
+</html>

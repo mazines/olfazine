@@ -1,0 +1,216 @@
+/* 08 Botanical tree. Parchment, green-black ink, sepia accents, book serif, thin round-capped lines. */
+:root {
+  --olf-bg: #f4efe3;
+  --olf-fg: #22301f;
+  --olf-muted: #5a5946;
+  --olf-line: #cfc3a8;
+  --olf-accent: #3d5a32;
+  --olf-focus: #1f5fbf;
+  --olf-demo-bg: #22301f;
+  --olf-demo-fg: #f4efe3;
+  --olf-private: #8a3b2e;
+  --sepia: #87582a;
+  --stem: #8b7656;
+  --leaf-bg: #e4e0c9;
+  --book: "Hoefler Text", "Baskerville", "Baskerville Old Face", Georgia, serif;
+  --branch-indent: 56px;
+  --leaf-indent: 36px;
+}
+body { font: 17px/1.55 var(--book); }
+
+.olf-demo-modes button, .olf-preview-banner button { min-height: 40px; }
+.olf-owner-btn, .olf-edit {
+  min-height: 40px; border-color: var(--stem); border-radius: 4px; font-family: var(--book);
+  font-variant: all-small-caps; letter-spacing: .08em; font-size: 15px;
+}
+.olf-link { border-radius: 4px; border-color: var(--olf-line); }
+.olf-link-shop { border-color: var(--olf-fg); }
+.olf-caveat { margin-top: 8px; }
+
+/* ---------- chrome ---------- */
+.olf-header {
+  max-width: 1040px; margin: 0 auto; padding: 44px 28px 18px;
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;
+  border-bottom: 1px solid var(--olf-line);
+}
+.olf-brand { display: flex; flex-direction: column; gap: 2px; }
+.olf-wordmark { font: 400 34px/1 var(--book); font-variant: small-caps; letter-spacing: .06em; }
+.bt-tag { color: var(--sepia); font-style: italic; font-size: 16px; }
+.olf-switch { background: #e9e2d0; border: 1px solid var(--olf-line); }
+.olf-switch [role="tab"] { min-height: 40px; font-family: var(--book); font-size: 16px; font-variant: all-small-caps; letter-spacing: .1em; }
+.olf-switch [role="tab"][aria-selected="true"] { background: var(--olf-fg); color: var(--olf-bg); box-shadow: none; }
+.olf-owner-tools { width: 100%; justify-content: flex-end; }
+
+.olf-main { max-width: 1040px; margin: 0 auto; padding: 28px 28px 120px; }
+
+.bt-sc { font-variant: all-small-caps; letter-spacing: .1em; }
+
+/* ---------- trunk ---------- */
+.bt-trunk { list-style: none; margin: 0; padding: 0; position: relative; }
+.bt-trunk::before {
+  content: ""; position: absolute; left: 21px; top: 26px; bottom: -120px; border-left: 1.5px solid var(--stem);
+}
+.bt-year { position: relative; }
+.bt-year-h { margin: 0; font-weight: normal; }
+.bt-node {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 14px; min-height: 52px;
+  padding: 4px 14px 4px 0; border: 0; border-radius: 6px; background: none; color: var(--olf-fg); cursor: pointer; text-align: left;
+}
+.bt-knot {
+  flex: none; width: 16px; height: 16px; margin-left: 14px; border-radius: 50%;
+  border: 1.5px solid var(--olf-fg); background: var(--olf-bg); transition: background .2s;
+}
+.bt-year.is-open .bt-knot { background: var(--olf-fg); box-shadow: 0 0 0 4px var(--olf-bg), 0 0 0 5px var(--stem); }
+.bt-year-num { font-size: 32px; line-height: 1; font-variant-numeric: oldstyle-nums; }
+.bt-node:hover .bt-year-num { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+
+
+/* ---------- branches ---------- */
+.bt-branches { list-style: none; margin: 0 0 0 21px; padding: 2px 0 18px; }
+.bt-branch { position: relative; padding-left: var(--branch-indent); }
+.bt-twig { position: absolute; display: block; overflow: visible; color: var(--stem); }
+.bt-twig-branch { left: 0; top: 0; width: var(--branch-indent); height: 28px; }
+.bt-branch-btn {
+  position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 12px; width: 100%; min-height: 56px;
+  padding: 8px 8px 12px 0; border: 0; border-radius: 6px; background: none; color: var(--olf-fg); cursor: pointer; text-align: left;
+}
+.bt-static { cursor: default; }
+button.bt-branch-btn:hover .bt-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.bt-bud { flex: none; width: 28px; display: flex; justify-content: center; }
+.bt-bud svg { display: block; }
+.bt-bud-pair svg + svg { margin-left: -12px; margin-top: 6px; }
+.bt-btext { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.bt-name { font-size: 21px; line-height: 1.25; overflow-wrap: anywhere; }
+.bt-by { font-variant: all-small-caps; letter-spacing: .1em; color: var(--sepia); font-size: 16px; }
+.bt-kicker { color: var(--sepia); font-size: 16px; }
+.bt-amp { font-style: italic; color: var(--sepia); }
+.bt-whens { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 15px; }
+.bt-when-year { font-style: italic; }
+.bt-q {
+  display: inline-block; padding: 0 6px; border: 1px dashed var(--stem); border-radius: 999px;
+  font-size: 13px; font-style: normal; line-height: 18px; color: var(--olf-muted); white-space: nowrap;
+}
+.bt-preview { color: var(--olf-muted); font-style: italic; font-size: 15px; }
+.bt-sign { position: relative; flex: none; width: 26px; height: 26px; margin-top: 4px; border: 1px solid var(--stem); border-radius: 50%; }
+.bt-sign::before, .bt-sign::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.4px; margin: -.7px 0 0 -5px;
+  background: var(--olf-fg); border-radius: 1px; transition: transform .2s;
+}
+.bt-sign::after { transform: rotate(90deg); }
+[aria-expanded="true"] > .bt-sign::after { transform: rotate(0deg); }
+.bt-branch-redacted .bt-name { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; color: var(--olf-muted); }
+.bt-branch-redacted .bt-twig { opacity: .7; }
+.bt-badges { display: inline-flex; flex-wrap: wrap; gap: 6px; margin: 2px 0; }
+.bt-badges:empty { display: none; }
+
+/* ---------- sub-branch: leaves + detail ---------- */
+.bt-sub { position: relative; margin: 0 0 22px 14px; padding: 4px 0 0 var(--leaf-indent); }
+.bt-sub::before { content: ""; position: absolute; left: 0; top: -56px; height: 60px; border-left: 1.4px solid var(--stem); }
+.bt-sub-grid { display: grid; grid-template-columns: minmax(180px, 250px) minmax(0, 1fr); gap: 16px 36px; align-items: start; }
+.bt-leafcol { min-width: 0; }
+.bt-leaves { position: relative; list-style: none; margin: 0; padding: 0; }
+.bt-leaf { position: relative; display: flex; align-items: center; gap: 10px; min-height: 44px; min-width: 0; }
+.bt-twig-leaf { left: calc(-1 * var(--leaf-indent)); top: 0; width: var(--leaf-indent); height: 22px; }
+.bt-leaf::before { content: ""; position: absolute; left: calc(-1 * var(--leaf-indent)); top: 0; bottom: 0; border-left: 1.4px solid var(--stem); }
+.bt-leaf:last-child::before { display: none; }
+.bt-leaf-icon {
+  flex: none; display: grid; place-items: center; width: 36px; height: 36px;
+  border-radius: 60% 0 60% 0; background: var(--leaf-bg); color: var(--olf-accent);
+}
+.bt-leaf-icon .olf-note-icon { color: var(--olf-accent); }
+.bt-leaf-label { font-size: 16px; line-height: 1.25; min-width: 0; overflow-wrap: anywhere; }
+.bt-leaf-bare { gap: 12px; align-items: center; }
+.bt-stub { flex: none; width: 12px; height: 12px; border-radius: 50%; border: 1.4px dashed var(--stem); margin-left: -6px; }
+.bt-leaf-bare .olf-empty { font-size: 15px; font-style: italic; }
+
+.bt-detail {
+  display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 20px; min-width: 0;
+  padding: 18px 20px; border: 1px solid var(--olf-line); border-radius: 3px; background: rgba(255, 253, 245, .55);
+}
+.bt-fig { margin: 0; text-align: center; color: var(--olf-muted); }
+.bt-fig svg { height: auto; }
+.bt-fig figcaption { font-size: 13px; font-style: italic; }
+.bt-dbody { min-width: 0; }
+.bt-dbody h4 { margin: 14px 0 4px; font-weight: normal; font-size: 17px; color: var(--sepia); }
+.bt-dbody > h4:first-of-type { margin-top: 0; }
+.bt-plist { list-style: none; margin: 0; padding: 0; }
+.bt-plist li { padding: 1px 0; }
+.bt-p-year { font-style: italic; }
+.bt-also { margin: 6px 0 0; color: var(--olf-muted); font-size: 15px; font-style: italic; }
+.bt-memory { margin: 0; font-size: 19px; font-style: italic; }
+.bt-links .olf-links { margin-top: 16px; }
+.bt-owner { margin-top: 14px; }
+
+/* ---------- seedlings (To try) ---------- */
+.bt-seedlings { position: relative; }
+.bt-seed-root { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 0 10px; min-height: 40px; }
+.bt-knot-seed { align-self: center; width: 14px; height: 18px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: var(--leaf-bg); border-color: var(--olf-accent); margin-left: 15px; }
+.bt-seed-title { font-size: 30px; font-variant: small-caps; letter-spacing: .05em; }
+.bt-seed-sub { color: var(--sepia); font-style: italic; font-size: 15px; }
+.bt-seed-branches { position: relative; }
+.bt-seed-branches::before { content: ""; position: absolute; left: 0; top: -12px; height: 14px; border-left: 1.5px solid var(--stem); }
+.bt-seed-branches > .bt-branch::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1.5px solid var(--stem); }
+.bt-seed-branches > .bt-branch:last-child::before { display: none; }
+
+/* one branch forking into two members */
+.bt-fork { position: relative; margin: 0 0 22px; padding-top: 40px; }
+.bt-fork::before { content: ""; position: absolute; left: 14px; top: -56px; height: 96px; border-left: 1.4px solid var(--stem); }
+.bt-fork::after {
+  content: ""; position: absolute; left: 14px; top: 18px; width: calc(50% + 18px); height: 22px;
+  border: 1.4px solid var(--stem); border-bottom: 0; border-radius: 16px 16px 0 0;
+}
+.bt-fork-members { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 36px; row-gap: 22px; }
+.bt-member { position: relative; min-width: 0; }
+.bt-member-head { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; }
+.bt-member-body {
+  display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; margin-top: 10px;
+  padding: 16px; border: 1px solid var(--olf-line); border-radius: 3px; background: rgba(255, 253, 245, .55);
+}
+.bt-leaves-plain { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0 12px; }
+.bt-leaves-plain .bt-leaf::before { display: none; }
+.bt-leaves-plain.bt-bare { display: block; }
+.bt-fork > .bt-owner { margin-left: 0; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 640px) {
+  :root { --branch-indent: 34px; --leaf-indent: 20px; }
+  body { font-size: 16px; }
+  .olf-header { padding: 26px 16px 14px; }
+  .olf-wordmark { font-size: 30px; }
+  .olf-switch { width: 100%; }
+  .olf-switch [role="tab"] { flex: 1; min-width: 0; }
+  .olf-main { padding: 20px 16px 88px; }
+  .bt-year-num { font-size: 28px; }
+  .bt-trunk::before { bottom: -88px; }
+  .bt-name { font-size: 19px; }
+  .bt-branch-btn { gap: 10px; padding-right: 2px; }
+
+  .bt-sub { margin-left: 14px; }
+  .bt-sub-grid { grid-template-columns: minmax(0, 1fr); }
+  /* leaves wrap into two columns on one stem */
+  .bt-leaves { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 10px; }
+  .bt-leaves::before { content: ""; position: absolute; left: calc(-1 * var(--leaf-indent)); top: 0; bottom: 22px; border-left: 1.4px solid var(--stem); }
+  .bt-leaves.bt-bare { display: block; }
+  .bt-leaves.bt-bare::before { bottom: 50%; }
+  .bt-twig-leaf, .bt-leaf::before { display: none; }
+  .bt-leaf { gap: 8px; }
+  .bt-leaf-icon { width: 32px; height: 32px; }
+  .bt-leaf-label { font-size: 15px; }
+  .bt-detail { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 14px; }
+  .bt-fig { text-align: left; }
+  .bt-fig svg { width: 72px; }
+
+  .bt-fork { padding-top: 12px; }
+  .bt-fork::before { top: -56px; height: auto; bottom: 40px; }
+  .bt-fork::after { display: none; }
+  .bt-fork-members { grid-template-columns: minmax(0, 1fr); }
+  .bt-member { padding-left: 34px; }
+  .bt-member::before { content: ""; position: absolute; left: 14px; top: 0; width: 20px; height: 20px; border-left: 1.4px solid var(--stem); border-bottom: 1.4px solid var(--stem); border-radius: 0 0 0 12px; }
+  .bt-member-body { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+  .bt-fig-sm svg { width: 56px; }
+  .bt-leaves-plain::before { display: none; }
+  .bt-fork > .bt-owner { margin-left: 34px; }
+}
+
+/* "wear together" is a note on a plain tile */
+.bt-wear { color: var(--sepia); font-style: italic; font-size: 15px; }

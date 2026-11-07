@@ -1,0 +1,187 @@
+/* 09 Yearly card stacks. Blush/sand page, white rounded cards, soft shadows, humanist sans. */
+:root {
+  --olf-bg: #f6efe8;
+  --olf-fg: #2f2925;
+  --olf-muted: #6b6058;
+  --olf-line: #e3d6ca;
+  --olf-accent: #9a5434;
+  --olf-focus: #2a5db0;
+  --olf-private: #9b3b2b;
+  --card: #ffffff;
+  --tint: #f8f1ea;
+  --shadow: 0 1px 2px rgba(80, 50, 30, .06), 0 8px 24px rgba(80, 50, 30, .09);
+  --shadow-lift: 0 2px 4px rgba(80, 50, 30, .08), 0 14px 32px rgba(80, 50, 30, .13);
+  --r: 16px;
+}
+body { font: 16px/1.5 "Avenir Next", "Avenir", "Gill Sans", "Segoe UI", system-ui, sans-serif; }
+
+/* ---------- chrome ---------- */
+.olf-demo-modes button, .olf-preview-banner button { min-height: 40px; }
+.olf-header {
+  max-width: 1120px; margin: 0 auto; padding: 32px 24px 22px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px;
+}
+.olf-brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.olf-wordmark { font-size: 28px; font-weight: 600; letter-spacing: .01em; }
+.cs-tag { color: var(--olf-muted); font-size: 15px; }
+.olf-switch { background: #eadfd4; }
+.olf-switch [role="tab"] { min-height: 40px; font-weight: 500; color: var(--olf-muted); }
+.olf-switch [role="tab"][aria-selected="true"] { background: var(--card); color: var(--olf-fg); box-shadow: 0 1px 4px rgba(80, 50, 30, .15); }
+.olf-owner-tools { width: 100%; justify-content: flex-end; }
+.olf-owner-btn, .olf-edit { min-height: 40px; border-radius: 10px; background: var(--card); }
+.olf-main { max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }
+.olf-link { border-radius: 12px; background: var(--card); }
+.olf-link-shop { border-color: var(--olf-accent); color: var(--olf-accent); font-weight: 600; }
+
+/* ---------- year stacks ---------- */
+.cs-years, .cs-grid, .cs-trygrid { list-style: none; margin: 0; padding: 0; }
+.cs-years, .cs-trygrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 26px 22px; align-items: start;
+}
+.cs-year.is-open, .cs-titem.is-open { grid-column: 1 / -1; }
+.cs-yh { margin: 0; font-weight: inherit; font-size: inherit; }
+
+/* Stack: a top card plus up to two offset edges behind it, kept inside the box so nothing overflows. */
+.cs-stack { position: relative; padding: 0 12px 12px 0; }
+.cs-stack::before, .cs-stack::after {
+  content: ""; position: absolute; border-radius: var(--r); background: var(--card); box-shadow: var(--shadow); display: none;
+}
+.cs-stack::before { top: 6px; left: 6px; right: 6px; bottom: 6px; background: #fbf6f1; }
+.cs-stack::after { top: 12px; left: 12px; right: 0; bottom: 0; background: #f3e9df; z-index: 0; }
+.cs-stack[data-depth="1"]::before, .cs-stack[data-depth="2"]::before, .cs-stack[data-depth="2"]::after { display: block; }
+.cs-stack::before { z-index: 1; }
+.cs-top {
+  position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px;
+  width: 100%; min-height: 150px; padding: 18px 20px; border: 0; border-radius: var(--r);
+  background: var(--card); box-shadow: var(--shadow); text-align: left; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.cs-top:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.cs-static { cursor: default; }
+.cs-static:hover { transform: none; box-shadow: var(--shadow); }
+.cs-ynum { font-size: 34px; font-weight: 600; line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.cs-ycount { color: var(--olf-muted); font-size: 14px; }
+.cs-top .cs-ynum, .cs-top .cs-ycount, .cs-top .cs-kicker, .cs-top .cs-name, .cs-top .cs-meta { grid-column: 1 / -1; }
+.cs-thumbs { display: flex; align-items: flex-end; grid-column: 1; margin-top: 10px; }
+.cs-thumb {
+  display: grid; place-items: center; width: 42px; height: 52px; border-radius: 10px; background: var(--tint);
+  color: var(--olf-muted); box-shadow: 0 0 0 2px var(--card);
+}
+.cs-thumb + .cs-thumb { margin-left: -8px; }
+.cs-thumb svg { width: 28px; height: 40px; }
+.cs-hint { grid-column: 2; align-self: end; color: var(--olf-accent); font-size: 14px; font-weight: 600; white-space: nowrap; }
+.cs-hint::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-3px); }
+[aria-expanded="true"] .cs-hint::after { transform: rotate(-135deg) translate(-2px, 0); }
+
+.cs-openbar {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; width: 100%; min-height: 56px; padding: 8px 4px 14px;
+  border: 0; background: none; text-align: left; cursor: pointer;
+}
+.cs-openbar .cs-hint { margin-left: auto; }
+.cs-openbar:hover .cs-hint { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- card grid ---------- */
+.cs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 18px; }
+.cs-card { position: relative; min-width: 0; border-radius: var(--r); background: var(--card); box-shadow: var(--shadow); }
+.cs-card.is-open { grid-column: 1 / -1; box-shadow: var(--shadow-lift); }
+.cs-card.is-open > .cs-card-face { height: auto; }
+.cs-card-face {
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px; width: 100%; height: 100%; min-height: 44px;
+  padding: 14px; border: 0; border-radius: var(--r); background: none; text-align: left; cursor: pointer;
+}
+button.cs-card-face:hover .cs-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.cs-art { display: grid; place-items: center; padding: 14px 0 10px; border-radius: 12px; background: var(--tint); color: var(--olf-muted); }
+.cs-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cs-name { font-size: 17px; font-weight: 600; overflow-wrap: anywhere; }
+.cs-meta { color: var(--olf-muted); font-size: 14px; }
+.cs-when { font-size: 14px; margin-top: 4px; }
+.cs-preview { color: var(--olf-muted); font-size: 13px; margin-top: 2px; }
+.cs-kicker { color: var(--olf-accent); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.cs-toggle { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, .85); }
+.cs-toggle::before, .cs-toggle::after { content: ""; position: absolute; left: 8px; right: 8px; top: 13.5px; height: 1.5px; background: var(--olf-muted); }
+.cs-toggle::after { transform: rotate(90deg); }
+[aria-expanded="true"] > .cs-toggle::after { display: none; }
+.cs-redacted .cs-card-face { cursor: default; }
+.cs-redacted .cs-name { color: var(--olf-muted); font-size: 14px; }
+
+/* Open card: summary turns into a header strip; detail fills the row. */
+.cs-card.is-open > .cs-card-face { flex-direction: row; align-items: center; padding-right: 56px; }
+.cs-card.is-open > .cs-card-face .cs-art { padding: 6px 10px; flex: none; }
+.cs-card.is-open > .cs-card-face .cs-preview { display: none; }
+.cs-detail {
+  display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px;
+  margin: 0 14px; padding: 18px 4px 22px; border-top: 1px solid var(--olf-line);
+}
+.cs-fig { margin: 0; padding: 18px 10px 10px; border-radius: 14px; background: var(--tint); text-align: center; color: var(--olf-muted); align-self: start; }
+.cs-fig figcaption { font-size: 12px; margin-top: 4px; }
+.cs-body { display: grid; gap: 16px; min-width: 0; }
+.cs-body h4, .cs-mbody h4 { margin: 0 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--olf-muted); }
+.cs-badges { margin: 0; }
+.cs-periods { list-style: none; margin: 0; padding: 0; }
+.cs-periods li + li { margin-top: 4px; }
+.cs-memory { margin: 0; font-size: 18px; }
+.cs-also, .cs-source { margin: 6px 0 0; color: var(--olf-muted); font-size: 14px; }
+.cs-owner { margin-top: 4px; }
+
+/* Year-precision periods look uncertain: dotted underline + label, never Jan to Dec. */
+.cs-per.is-unsure { text-decoration: underline dotted var(--olf-muted); text-underline-offset: 4px; }
+.cs-q {
+  display: inline-block; padding: 0 8px; border: 1px dashed var(--olf-muted); border-radius: 999px;
+  font-size: 12px; line-height: 18px; color: var(--olf-muted); text-decoration: none; vertical-align: 1px;
+}
+
+.cs-gap { margin: 28px 4px 0; color: var(--olf-muted); font-size: 14px; }
+
+/* ---------- To try ---------- */
+.cs-titem .cs-top .cs-name { font-size: 18px; }
+.cs-titem .cs-static .cs-name { font-size: 14px; color: var(--olf-muted); }
+.cs-single { align-self: start; }
+.cs-pair { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; gap: 0; }
+.cs-join { position: relative; display: grid; place-items: center; width: 56px; }
+.cs-join::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; border-top: 1.5px dashed var(--olf-accent); }
+.cs-join span {
+  position: relative; padding: 6px 4px; border-radius: 999px; background: var(--olf-bg); color: var(--olf-accent);
+  font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg);
+  border: 1px solid var(--olf-accent);
+}
+.cs-mcard { padding: 16px; }
+.cs-mhead { display: flex; align-items: center; gap: 14px; }
+.cs-mhead .cs-art { flex: none; padding: 10px 12px; }
+.cs-mbody { display: grid; gap: 14px; margin-top: 16px; }
+.cs-titem > .cs-owner { margin-top: 12px; }
+
+/* ---------- motion: cards deal out of the stack ---------- */
+@keyframes cs-deal { from { opacity: 0; transform: translate(-10px, -14px) rotate(-1.5deg) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes cs-unfold { from { opacity: .4; transform: scale(.985); } to { opacity: 1; transform: none; } }
+.is-dealt { animation: cs-deal .38s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.cs-pair.is-dealt > * { animation: cs-deal .38s cubic-bezier(.2, .7, .2, 1) both; }
+.cs-pair.is-dealt > :last-child { animation-delay: 70ms; }
+.cs-pair.is-dealt { animation: none; }
+.is-unfolding { animation: cs-unfold .28s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .is-dealt, .cs-pair.is-dealt > *, .is-unfolding { animation: none !important; }
+  .cs-top, .cs-top:hover { transition: none; transform: none; }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 640px) {
+  .olf-header { padding: 20px 16px 16px; }
+  .olf-switch { width: 100%; }
+  .olf-switch [role="tab"] { flex: 1; }
+  .olf-main { padding: 0 16px 80px; }
+  .cs-years, .cs-trygrid { grid-template-columns: 1fr; gap: 18px; }
+  .cs-top { min-height: 128px; padding: 16px; }
+  .cs-ynum { font-size: 30px; }
+  .cs-grid { grid-template-columns: 1fr; gap: 14px; }
+  .cs-card-face { flex-direction: row; align-items: center; padding-right: 52px; }
+  .cs-card-face .cs-art { flex: none; padding: 6px 8px; }
+  .cs-card-face .cs-art svg { width: 44px; height: auto; }
+  .cs-detail { grid-template-columns: 1fr; gap: 14px; margin: 0 12px; }
+  .cs-fig { justify-self: start; padding: 12px 18px 8px; }
+  .cs-fig svg { width: 84px; height: auto; }
+  .cs-pair { grid-template-columns: 1fr; }
+  .cs-join { width: auto; height: 44px; }
+  .cs-join::before { top: 6px; bottom: 6px; left: 50%; right: auto; border-top: 0; border-left: 1.5px dashed var(--olf-accent); }
+  .cs-join span { writing-mode: horizontal-tb; transform: none; padding: 2px 12px; }
+  .cs-mhead .cs-art svg { width: 56px; height: auto; }
+}

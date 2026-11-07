@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Olfazine · Phase 1 concept gallery</title>
+  <link rel="stylesheet" href="gallery.css" />
+</head>
+<body>
+  <header class="g-head">
+    <div>
+      <p class="g-kicker">Olfazine · Phase 1 · local only</p>
+      <h1>Ten concepts</h1>
+      <p class="g-lede">Every concept uses the same data, dates, and redaction rules. They differ in layout, density, type, imagery, and how things open.
+        Previews below are the live pages, rendered at the exact comparison viewport and scaled to fit.</p>
+    </div>
+    <form class="g-controls" aria-label="Comparison state">
+      <fieldset>
+        <legend>State</legend>
+        <label><input type="radio" name="state" value="history" checked /> History · 2020 · Black Orchid</label>
+        <label><input type="radio" name="state" value="try" /> To try · Wear together</label>
+        <label><input type="radio" name="state" value="default" /> First load</label>
+      </fieldset>
+      <fieldset>
+        <legend>Viewer</legend>
+        <label><input type="radio" name="mode" value="public" checked /> Public</label>
+        <label><input type="radio" name="mode" value="owner" /> Owner (simulated)</label>
+      </fieldset>
+      <fieldset>
+        <legend>Viewport</legend>
+        <label><input type="radio" name="vp" value="desktop" checked /> Desktop 1440×1000</label>
+        <label><input type="radio" name="vp" value="mobile" /> Mobile 390×844</label>
+        <label><input type="radio" name="vp" value="both" /> Both</label>
+      </fieldset>
+    </form>
+  </header>
+
+  <main>
+    <section class="g-recs" aria-labelledby="recs-h">
+      <h2 id="recs-h">Recommendations</h2>
+      <ol id="recs"></ol>
+      <p class="g-combo" id="combo"></p>
+      <p class="g-combo"><a href="compare.html">Matched screenshots</a> (static, same states and viewports).</p>
+    </section>
+    <ol class="g-grid" id="grid"></ol>
+  </main>
+
+  <footer class="g-foot">
+    <p>Mock owner toggle demonstrates design only. It is not authentication. Private examples are synthetic.
+      Notes are unverified samples; bottles are illustrative placeholders; no prices are sourced yet.</p>
+  </footer>
+  <script src="gallery.js"></script>
+</body>
+</html>

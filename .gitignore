@@ -1,0 +1,12 @@
+# private / local only
+.env.local
+imports/
+Olfazine_Claude_Code_Brief.txt
+NOTES.md
+# tooling
+tools/node_modules/
+tools/package-lock.json
+tools/wkshot
+tools/cutout
+mockups/screenshots/montage/
+.DS_Store

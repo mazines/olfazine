@@ -1,0 +1,159 @@
+/* 06 Fragrance index. Off-white page, near-black ink, one red accent, text serif with tabular figures. */
+:root {
+  --olf-bg: #fcfbf7;
+  --olf-fg: #1b1a17;
+  --olf-muted: #5c5850;
+  --olf-line: #b9b4a8;
+  --olf-accent: #1b1a17;
+  --olf-focus: #b3261e;
+  --olf-private: #b3261e;
+  --red: #b3261e;
+  --hair: #dcd8cd;
+  --tree: #9a958a;
+  --olf-radius: 999px;
+}
+body {
+  font: 15px/1.5 "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ---------- chrome ---------- */
+.olf-demo-modes button, .olf-preview-banner button { min-height: 40px; }
+.olf-header {
+  max-width: 980px; margin: 0 auto; padding: 32px 24px 14px;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 20px;
+  border-bottom: 1px solid var(--olf-fg);
+}
+.olf-brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.olf-wordmark { font-size: 30px; letter-spacing: .01em; }
+.fi-tag { color: var(--red); font-variant-caps: all-small-caps; letter-spacing: .12em; font-size: 16px; }
+.olf-switch { padding: 2px; background: transparent; border: 1px solid var(--olf-fg); }
+.olf-switch [role="tab"] { min-height: 40px; min-width: 80px; padding: 4px 14px; color: var(--olf-fg); font-variant-caps: all-small-caps; letter-spacing: .1em; font-size: 16px; }
+.olf-switch [role="tab"][aria-selected="true"] { background: var(--olf-fg); color: var(--olf-bg); box-shadow: none; }
+.olf-owner-tools { width: 100%; justify-content: flex-end; }
+.olf-owner-btn, .olf-edit { min-height: 40px; border-radius: 2px; border-color: var(--olf-fg); font-family: inherit; }
+.olf-main { max-width: 980px; margin: 0 auto; padding: 4px 24px 96px; }
+.olf-link { border-radius: 2px; min-height: 40px; padding: 8px 12px; }
+.olf-link-shop { border-color: var(--olf-fg); }
+.olf-badge-private { border-radius: 2px; }
+.olf-note-icon { color: var(--olf-fg); }
+
+/* ---------- year headings ---------- */
+.fi-index, .fi-rows { list-style: none; margin: 0; padding: 0; }
+.fi-yh { margin: 0; font-weight: normal; }
+.fi-yhead {
+  display: flex; align-items: baseline; gap: 14px; width: 100%; min-height: 64px; padding: 18px 2px 4px;
+  border: 0; border-bottom: 1px solid var(--olf-fg); background: none; cursor: pointer; text-align: left;
+}
+.fi-ynum { font-size: 46px; line-height: 1; letter-spacing: -.01em; font-variant-numeric: lining-nums tabular-nums; }
+.fi-year.is-open .fi-ynum { color: var(--red); }
+.fi-yrule { flex: 1; min-width: 16px; align-self: center; border-bottom: 1px dotted var(--tree); transform: translateY(8px); }
+.fi-ycount { color: var(--olf-muted); font-variant-caps: all-small-caps; letter-spacing: .08em; font-size: 16px; white-space: nowrap; }
+.fi-sign { position: relative; flex: none; width: 12px; height: 12px; align-self: center; transform: translateY(6px); }
+.fi-sign::before, .fi-sign::after { content: ""; position: absolute; background: var(--olf-fg); }
+.fi-sign::before { left: 0; right: 0; top: 5.5px; height: 1px; }
+.fi-sign::after { top: 0; bottom: 0; left: 5.5px; width: 1px; }
+[aria-expanded="true"] > .fi-sign::after { display: none; }
+.fi-yhead:hover .fi-ynum { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.fi-gap {
+  padding: 10px 2px; border-bottom: 1px dashed var(--hair); color: var(--olf-muted); font-style: italic; font-size: 14px;
+}
+.fi-gap-years { font-style: normal; margin-right: 6px; }
+.fi-rows { margin-bottom: 6px; }
+
+/* ---------- index rows ---------- */
+.fi-line {
+  display: grid; grid-template-columns: minmax(0, max-content) minmax(1.5rem, 1fr) auto minmax(8rem, 14rem);
+  align-items: baseline; column-gap: 10px; width: 100%; min-height: 44px; padding: 9px 2px;
+  border: 0; border-bottom: 1px solid var(--hair); background: none; text-align: left; cursor: pointer;
+}
+.fi-line:hover .fi-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.fi-static { cursor: default; display: block; }
+.fi-namecell { min-width: 0; overflow-wrap: anywhere; }
+.fi-name { font-size: 16px; }
+.fi-row.is-open > .fi-line .fi-name { color: var(--red); }
+.fi-brand { color: var(--olf-muted); font-style: italic; }
+.fi-leader { align-self: end; margin-bottom: 7px; border-bottom: 1px dotted var(--tree); min-width: 1.5rem; }
+.fi-period { white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
+.fi-per.is-unsure { font-style: italic; text-decoration: underline dotted var(--tree); text-underline-offset: 3px; }
+.fi-q { font-variant-caps: all-small-caps; letter-spacing: .06em; color: var(--olf-muted); font-style: normal; font-size: 14px; }
+.fi-notes { color: var(--olf-muted); font-variant-caps: all-small-caps; letter-spacing: .06em; font-size: 15px; overflow-wrap: anywhere; }
+.fi-notes-none { font-style: italic; }
+.fi-kind { color: var(--olf-muted); font-variant-caps: all-small-caps; letter-spacing: .08em; }
+.fi-redacted .fi-name { font-size: 13px; color: var(--olf-muted); }
+.fi-ph { width: 12px; height: 17px; margin-right: 8px; vertical-align: -3px; color: var(--olf-muted); }
+.fi-ph + .fi-ph { margin-left: -4px; }
+
+/* ---------- expanded block with tree branches ---------- */
+.fi-expand {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 28px;
+  padding: 8px 2px 18px 14px; border-bottom: 1px solid var(--hair); font-size: 14.5px;
+}
+.fi-fig { margin: 0; text-align: center; color: var(--olf-muted); font-size: 11px; font-variant-caps: all-small-caps; letter-spacing: .08em; }
+.fi-fig figcaption { margin-top: 2px; max-width: 80px; }
+.fi-expand > .fi-fig, .fi-figs { grid-column: 2; grid-row: 1; align-self: start; }
+.fi-figs { display: flex; gap: 10px; }
+.fi-owner { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-left: 24px; }
+
+.fi-tree { list-style: none; margin: 0; padding: 0; }
+.fi-node, .fi-leaf { position: relative; padding: 3px 0 3px 26px; }
+/* Vertical stem and horizontal elbow, drawn with borders (├ and └). */
+.fi-node::before, .fi-leaf::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; border-left: 1px solid var(--tree); }
+.fi-node::after, .fi-leaf::after { content: ""; position: absolute; left: 7px; top: 1.05em; width: 13px; border-top: 1px solid var(--tree); }
+.fi-node:last-child::before, .fi-leaf:last-child::before { bottom: auto; height: 1.05em; }
+.fi-label { font-variant-caps: all-small-caps; letter-spacing: .1em; font-size: 15px; font-weight: 600; }
+.fi-member > .fi-label { font-variant-caps: normal; letter-spacing: 0; font-size: 16px; font-weight: 600; }
+.fi-member > .fi-label .fi-brand { font-weight: 400; }
+.fi-note { display: inline-flex; align-items: center; gap: 8px; }
+.fi-memory { font-style: italic; }
+.fi-see, .fi-source { color: var(--olf-muted); font-size: 13.5px; }
+.fi-see { font-style: italic; }
+.fi-leaf .olf-caveat { margin: 0; }
+.fi-leaf .olf-links { gap: 6px; padding: 2px 0; }
+.fi-leaf .olf-price, .fi-leaf .olf-empty { margin: 0; font-size: 14px; }
+
+/* ---------- To try ---------- */
+.fi-try-head {
+  display: flex; align-items: baseline; gap: 14px; margin: 0; padding: 18px 2px 4px; border-bottom: 1px solid var(--olf-fg);
+  font-size: 30px; line-height: 1.1;
+}
+.fi-try-head .fi-yrule { transform: translateY(6px); }
+.fi-group > .fi-line { position: relative; display: block; padding-left: 20px; }
+.fi-group > .fi-line::before {
+  content: ""; position: absolute; left: 4px; top: 12px; bottom: 12px; width: 7px;
+  border: 1px solid var(--red); border-right: 0;
+}
+.fi-glabel { display: block; color: var(--red); font-variant-caps: all-small-caps; letter-spacing: .12em; font-size: 15px; line-height: 1.3; }
+.fi-subline {
+  display: grid; grid-template-columns: minmax(0, max-content) minmax(1.5rem, 1fr) minmax(8rem, 14rem);
+  align-items: baseline; column-gap: 10px; min-height: 30px; padding: 3px 0;
+}
+.fi-subline + .fi-subline { border-top: 1px dotted var(--hair); }
+.fi-expand-group { padding-left: 20px; }
+
+/* ---------- small screens ---------- */
+@media (max-width: 640px) {
+  .olf-header { padding: 20px 14px 12px; }
+  .olf-switch { width: 100%; }
+  .olf-switch [role="tab"] { flex: 1; }
+  .olf-main { padding: 0 14px 80px; }
+  .fi-ynum { font-size: 38px; }
+  .fi-line { grid-template-columns: minmax(0, 1fr) fit-content(48%); row-gap: 1px; padding: 8px 2px; }
+  .fi-line .fi-leader { display: none; }
+  .fi-line > .fi-notes { grid-column: 1 / -1; }
+  .fi-period { white-space: normal; text-align: right; }
+  .fi-namecell .fi-brand { display: block; font-size: 14px; }
+  .fi-subline { grid-template-columns: 1fr; }
+  .fi-subline .fi-leader { display: none; }
+  .fi-expand { padding-left: 4px; gap: 8px 12px; }
+  .fi-node, .fi-leaf { padding-left: 18px; }
+  .fi-node::after, .fi-leaf::after { width: 8px; }
+  .fi-node::before, .fi-leaf::before { left: 5px; }
+  .fi-node::after, .fi-leaf::after { left: 5px; }
+  .fi-expand > .fi-fig svg { width: 52px; height: auto; }
+  .fi-figs { flex-direction: column; }
+  .fi-figs svg { width: 44px; height: auto; }
+  .fi-fig figcaption { max-width: 56px; }
+  .fi-owner { padding-left: 0; }
+  .fi-try-head { font-size: 26px; }
+}

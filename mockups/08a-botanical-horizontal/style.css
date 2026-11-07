@@ -1,0 +1,130 @@
+/* 08a Botanical tree, horizontal trunk. Layers on 08's stylesheet (same palette and type). */
+.olf-header, .olf-main { max-width: 1320px; }
+
+/* ---------- trunk: years as knots along one horizontal line ---------- */
+.bh-canopy { position: relative; }
+.bh-trunk {
+  position: relative; list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); column-gap: 14px; align-items: start;
+}
+.bh-year { position: relative; min-width: 0; }
+/* trunk segment from each knot to the next. The oldest end (left) runs off the screen; the newest knot is the tip. */
+html, body { overflow-x: clip; }
+.bh-year:not(:last-child)::before {
+  content: ""; position: absolute; left: 8px; right: -14px; top: 26px; border-top: 1.5px solid var(--stem);
+}
+.bh-year:first-child::after {
+  content: ""; position: absolute; left: -100vw; width: 100vw; top: 26px; border-top: 1.5px solid var(--stem);
+}
+.bh-year-h { margin: 0; font-weight: normal; }
+.bh-knot-btn {
+  position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; min-height: 52px;
+  padding: 0 10px 0 0; border: 0; border-radius: 6px; background: var(--olf-bg); color: var(--olf-fg); cursor: pointer;
+}
+.bh-knot-btn .bt-knot { margin-left: 0; }
+.bh-year.is-open .bt-knot { background: var(--olf-fg); box-shadow: 0 0 0 4px var(--olf-bg), 0 0 0 5px var(--stem); }
+.bh-year-num { font-size: 30px; line-height: 1; font-variant-numeric: oldstyle-nums; }
+.bh-knot-btn:hover .bh-year-num { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+
+/* fragrances hang from the knot on one vertical stem */
+.bh-twigs { position: relative; list-style: none; margin: 0; padding: 6px 0 0 8px; }
+.bh-twigs::before { content: ""; position: absolute; left: 7px; top: -14px; bottom: 30px; border-left: 1.4px solid var(--stem); }
+.bh-twig, .bh-seed { position: relative; min-width: 0; }
+.bh-twigs > .bh-twig { padding-left: 16px; }
+.bh-twigs > .bh-twig::before {
+  content: ""; position: absolute; left: -1px; top: 0; width: 15px; height: 22px;
+  border-left: 1.4px solid var(--stem); border-bottom: 1.4px solid var(--stem); border-radius: 0 0 0 12px;
+}
+.bh-twigs > .bh-uncertain::before { border-bottom-style: dashed; }
+.bh-twig-btn {
+  position: relative; display: flex; align-items: flex-start; gap: 8px; width: 100%; min-height: 48px;
+  padding: 8px 6px 10px; border: 1px solid transparent; border-radius: 6px; background: none; color: var(--olf-fg); cursor: pointer; text-align: left;
+}
+button.bh-twig-btn:hover .bh-name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.bh-twig.is-open > .bh-twig-btn, .bh-seed.is-open > .bh-twig-btn { border-color: var(--stem); background: rgba(255, 253, 245, .6); }
+.bh-twig .bt-bud { width: 24px; }
+.bh-ttext { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.bh-name { font-size: 17px; line-height: 1.25; overflow-wrap: break-word; }
+.bh-twig .bt-by, .bh-seed .bt-by { font-size: 14px; }
+.bh-whens { display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 14px; }
+.bh-when-year { font-style: italic; }
+.bh-twig-redacted .bh-name { font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: var(--olf-muted); }
+
+/* ---------- panel: unfolds under the canopy, stem points at its column ---------- */
+.bh-panel {
+  position: relative; margin: 34px 0 8px; padding: 22px 24px 22px;
+  border: 1px solid var(--olf-line); border-radius: 3px; background: rgba(255, 253, 245, .6);
+}
+.bh-panel::before {
+  content: ""; position: absolute; left: var(--stem-x, 40px); top: -35px; height: 34px; border-left: 1.4px solid var(--stem);
+}
+.bh-panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.bh-panel-name { font-size: 26px; line-height: 1.2; }
+.bh-member-name { font-size: 22px; }
+
+/* notes strung along one horizontal stem */
+.bh-leafline {
+  position: relative; list-style: none; margin: 16px 0 0; padding: 22px 0 0;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px 8px;
+}
+.bh-leafline::before { content: ""; position: absolute; left: 18px; right: 18px; top: 0; border-top: 1.4px solid var(--stem); }
+.bh-leaf { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 0; }
+.bh-leaf::before { content: ""; position: absolute; left: 50%; top: -22px; height: 22px; border-left: 1.4px solid var(--stem); }
+.bh-leaf-label { font-size: 14px; line-height: 1.25; overflow-wrap: break-word; max-width: 100%; }
+.bh-leafline.bh-bare { display: flex; align-items: center; gap: 12px; padding-top: 18px; }
+.bh-leafline.bh-bare::before { right: auto; width: 40px; }
+.bh-bud-closed { flex: none; width: 12px; height: 12px; border-radius: 50%; border: 1.4px dashed var(--stem); }
+.bh-leafline.bh-bare .olf-empty { font-size: 15px; font-style: italic; }
+
+.bh-panel-body {
+  display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px 32px;
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--olf-line); align-items: start;
+}
+.bh-col { min-width: 0; }
+.bh-h { margin: 0 0 6px; font-weight: normal; font-size: 17px; color: var(--sepia); }
+.bh-col .olf-links { flex-direction: column; align-items: flex-start; }
+.bh-col .bt-owner { margin-top: 12px; }
+
+/* ---------- To try: seedlings along a horizontal stem ---------- */
+.bh-seeds {
+  position: relative; list-style: none; margin: 0; padding: 26px 0 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px 16px;
+}
+.bh-seeds::before { content: ""; position: absolute; left: 7px; right: -100vw; top: 0; border-top: 1.5px solid var(--stem); }
+.bh-seeds > .bh-seed::before { content: ""; position: absolute; left: 24px; top: -26px; height: 26px; border-left: 1.4px solid var(--stem); }
+
+.bh-member-body { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 18px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--olf-line); }
+.bh-member-body .olf-links { margin-top: 12px; }
+
+@media (max-width: 1180px) {
+  .bh-name { font-size: 16px; }
+  .bh-year-num { font-size: 26px; }
+  .bh-trunk { column-gap: 8px; }
+  .bh-year:not(:last-child)::before { right: -8px; }
+  .bh-panel-body { grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr); }
+  .bh-panel-body > .bh-col:last-child { grid-column: 2 / -1; }
+}
+
+/* note tiers (top / middle / base) when the source supplies them */
+.bh-tiers { display: grid; gap: 6px; margin-top: 10px; }
+.bh-tier { display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: start; gap: 12px; }
+.bh-tier-h { margin: 30px 0 0; font-weight: normal; font-size: 16px; color: var(--sepia); }
+.bh-tier .bh-leafline { margin-top: 6px; }
+.bt-leaf-icon .olf-note-img { display: block; }
+.olf-bottle-img { display: block; }
+
+/* "wear together" is a note on a plain tile, not a group */
+.bh-wear { margin-top: 4px; color: var(--sepia); font-style: italic; font-size: 14px; line-height: 1.3; }
+.bh-wear-panel { margin: 6px 0 0; font-size: 16px; }
+
+/* Collapse all: sits just left of the History / To try pill, same pill language */
+.olf-nav { display: flex; align-items: center; gap: 10px; }
+.olf-collapse {
+  min-height: 40px; padding: 6px 16px; border: 1px solid var(--olf-line); border-radius: 999px; background: #e9e2d0;
+  color: var(--olf-fg); cursor: pointer; font-family: var(--book); font-size: 16px; font-variant: all-small-caps; letter-spacing: .1em;
+}
+.olf-collapse:hover { border-color: var(--stem); }
+@media (max-width: 640px) {
+  .olf-nav { width: 100%; }
+  .olf-nav .olf-switch { flex: 1; }
+}

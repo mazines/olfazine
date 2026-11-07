@@ -1,0 +1,97 @@
+/* Olfazine shared base. Concepts override the custom properties and add their own layout. */
+:root {
+  --olf-bg: #f6f2ea;
+  --olf-fg: #23211e;
+  --olf-muted: #6b665d;
+  --olf-line: #d9d2c5;
+  --olf-accent: #7a5b3a;
+  --olf-focus: #1f5fbf;
+  --olf-demo-bg: #23211e;
+  --olf-demo-fg: #f3efe6;
+  --olf-private: #8a3b2e;
+  --olf-radius: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--olf-bg); color: var(--olf-fg); overflow-x: hidden; }
+img, svg { max-width: 100%; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 2px solid var(--olf-focus); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- demo chrome (same in every concept) ---------- */
+.olf-demo {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px;
+  padding: 6px 16px; background: var(--olf-demo-bg); color: var(--olf-demo-fg);
+  font: 12px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.olf-demo-label strong { font-weight: 600; }
+.olf-demo-modes { display: inline-flex; gap: 4px; }
+.olf-demo-modes button {
+  min-height: 40px; padding: 4px 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 6px;
+  background: transparent; color: inherit; cursor: pointer; font-size: 12px;
+}
+.olf-demo-modes button[aria-pressed="true"] { background: var(--olf-demo-fg); color: var(--olf-demo-bg); border-color: var(--olf-demo-fg); }
+.olf-demo :focus-visible { outline-color: #9cc3ff; }
+
+.olf-preview-banner {
+  padding: 8px 16px; text-align: center; background: #fff4cc; color: #3a3000;
+  font: 13px/1.4 system-ui, -apple-system, sans-serif; border-bottom: 1px solid #e6d68a;
+}
+.olf-preview-banner button { margin-left: 8px; min-height: 40px; padding: 2px 10px; border: 1px solid currentColor; border-radius: 6px; background: transparent; cursor: pointer; }
+
+.olf-toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  padding: 10px 16px; border-radius: 8px; background: var(--olf-demo-bg); color: var(--olf-demo-fg);
+  font: 13px/1.4 system-ui, -apple-system, sans-serif; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); z-index: 50;
+}
+.olf-toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- segmented switch (concepts restyle) ---------- */
+.olf-switch { display: inline-flex; padding: 3px; border-radius: var(--olf-radius); background: color-mix(in srgb, var(--olf-fg) 8%, transparent); }
+.olf-switch [role="tab"] {
+  min-height: 40px; min-width: 88px; padding: 6px 16px; border: 0; border-radius: var(--olf-radius);
+  background: transparent; color: var(--olf-muted); cursor: pointer; font-size: 14px;
+}
+.olf-switch [role="tab"][aria-selected="true"] { background: var(--olf-bg); color: var(--olf-fg); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+
+.olf-owner-tools { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.olf-owner-btn, .olf-edit {
+  min-height: 40px; padding: 4px 12px; border: 1px solid var(--olf-line); border-radius: 8px;
+  background: transparent; color: var(--olf-fg); cursor: pointer; font-size: 13px;
+}
+.olf-edit { min-height: 40px; padding: 2px 10px; font-size: 12px; }
+
+/* ---------- fragments ---------- */
+.olf-notes { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.olf-note { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.olf-note-icon { flex: none; color: var(--olf-accent); }
+.olf-caveat, .olf-empty, .olf-price-src, .olf-link-detail { color: var(--olf-muted); font-size: 12px; }
+.olf-caveat { margin: 6px 0 0; font-style: italic; }
+.olf-empty { margin: 0; }
+.olf-price { margin: 0; font-size: 14px; }
+.olf-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.olf-link {
+  display: inline-flex; align-items: baseline; gap: 6px; min-height: 40px; padding: 9px 14px;
+  border: 1px solid var(--olf-line); border-radius: 8px; text-decoration: none; font-size: 14px;
+}
+.olf-link-shop { border-color: var(--olf-fg); }
+.olf-link:hover { background: color-mix(in srgb, var(--olf-fg) 6%, transparent); }
+
+.olf-badge {
+  display: inline-block; padding: 1px 8px; border-radius: 999px; font: 600 11px/18px system-ui, -apple-system, sans-serif;
+  letter-spacing: .02em; vertical-align: middle;
+}
+.olf-badge-private { background: var(--olf-private); color: #fff; }
+.olf-badge-synthetic { border: 1px dashed var(--olf-muted); color: var(--olf-muted); font-weight: 500; }
+
+.olf-redacted { letter-spacing: .14em; font-weight: 600; }
+
+.olf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
