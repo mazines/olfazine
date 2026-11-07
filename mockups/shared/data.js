@@ -97,6 +97,7 @@
     },
     "davidoff-cool-water": {
       name: "Cool Water", brand: "Davidoff", variant: null,
+      image: "img/bottles/bottle-davidoff-cool-water.png",
       bottle: { shape: "square", glass: "#2f7fb0", cap: "#c9d4dc" },
       notes: [],
     },
