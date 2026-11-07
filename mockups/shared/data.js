@@ -122,7 +122,7 @@
   // end: null means unknown. ongoing must be explicit.
   const history = [
     { id: "h-sauvage", fragrance: "dior-sauvage",
-      periods: [{ start: { y: 2017 }, end: { y: 2018 } }],
+      periods: [{ start: { y: 2018 }, end: { y: 2018 } }],
       memory: "High School" },
     { id: "h-black-orchid", fragrance: "tf-black-orchid",
       periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
@@ -132,7 +132,7 @@
       periods: [{ start: { y: 2020, m: 1 }, end: { y: 2020, m: 12 } }],
       memory: "Sophomore year of college, COVID" },
     { id: "h-br540", fragrance: "mfk-br540",
-      periods: [{ start: { y: 2020, m: 1 }, end: { y: 2020, m: 12 } }],
+      periods: [{ start: { y: 2021 }, end: { y: 2021 } }],
       memory: "Sophomore year of college, COVID",
       sourceNote: "Originally written as MFK br450; confirmed as Baccarat Rouge 540." },
     { id: "h-intoxicated", fragrance: "kilian-intoxicated",
