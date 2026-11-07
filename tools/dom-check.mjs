@@ -61,21 +61,20 @@ for (const c of concepts) {
       if (y2020.getAttribute('aria-expanded') !== 'true') click(y2020);
       ok(d.getElementById('olf-panel-history').textContent.includes('Baccarat Rouge 540'), 'clicking 2020 reveals its fragrances');
       // Fragrance expansion
-      const bo = d.querySelector('[data-olf-entry="2020:h-black-orchid"]');
-      ok(!!bo, 'Black Orchid entry control in 2020');
-      if (bo) {
-        click(bo);
+      const br = d.querySelector('[data-olf-entry="2020:h-br540"]');
+      ok(!!br, 'Baccarat Rouge 540 entry control in 2020');
+      if (br) {
+        click(br);
         const t = d.getElementById('olf-panel-history').textContent;
-        ok(t.includes('August 2018') && t.includes('May 2020'), 'Black Orchid detail shows both separate intervals');
-        ok(t.includes('Freshman Year of College'), 'Black Orchid detail shows memory');
-        const again = d.querySelector('[data-olf-entry="2020:h-black-orchid"]');
+        ok(t.includes('2020'), 'Baccarat Rouge 540 detail shows its period');
+        ok(t.includes('Sophomore year of college, COVID'), 'Baccarat Rouge 540 detail shows memory');
+        const again = d.querySelector('[data-olf-entry="2020:h-br540"]');
         ok(again && again.getAttribute('aria-expanded') === 'true', 'entry reports aria-expanded=true');
         ok(!again.querySelector('a, button'), 'no links/buttons nested inside the disclosure button');
       }
-      const rows2020 = d.querySelectorAll('[data-olf-entry^="2020:h-black-orchid"]');
-      ok(new Set([...rows2020].map(r => r.dataset.olfEntry)).size === 1, 'Black Orchid appears once in 2020');
+      ok(d.querySelectorAll('[data-olf-entry="2020:h-br540"]').length === 1, 'Baccarat Rouge 540 appears once in 2020');
     }
-    ok(!d.querySelector('[data-olf-year="2021"]'), 'no invented 2021 year control');
+    ok(!d.querySelector('[data-olf-year="2023"]'), 'no empty 2023 year control');
 
     // Tab switch preserves state
     const tabTry = d.querySelector('[data-olf-view="try"]');
@@ -86,7 +85,7 @@ for (const c of concepts) {
     ok(!d.querySelector('#olf-panel-try [data-olf-try]'), 'public To try has no openable tiles');
     ok((d.getElementById('olf-panel-try').textContent.match(/REDACTED/g) || []).length >= 3, 'public To try shows 3 REDACTED tiles');
     click(d.querySelector('[data-olf-view="history"]'));
-    ok(d.querySelector('[data-olf-entry="2020:h-black-orchid"]')?.getAttribute('aria-expanded') === 'true', 'History expansion preserved after tab round-trip');
+    ok(d.querySelector('[data-olf-entry="2020:h-br540"]')?.getAttribute('aria-expanded') === 'true', 'History expansion preserved after tab round-trip');
 
     // Public redaction: all of 2025 is private.
     ok(!PRIVATE.test(d.getElementById('olf-root').innerHTML), 'public DOM has no private identities');
@@ -130,8 +129,8 @@ for (const c of concepts) {
     // URL seeding for matched screenshots
     ({ d, errors } = await load(c, '?view=try&group=w-tuxedo&mode=owner'));
     ok(!d.getElementById('olf-panel-try').hidden && d.querySelector('[data-olf-try="w-tuxedo"]')?.getAttribute('aria-expanded') === 'true', 'URL state seeds To try + open tile');
-    ({ d } = await load(c, '?year=2020&entry=h-black-orchid'));
-    ok(d.querySelector('[data-olf-entry="2020:h-black-orchid"]')?.getAttribute('aria-expanded') === 'true', 'URL state seeds year + entry');
+    ({ d } = await load(c, '?year=2020&entry=h-br540'));
+    ok(d.querySelector('[data-olf-entry="2020:h-br540"]')?.getAttribute('aria-expanded') === 'true', 'URL state seeds year + entry');
   } catch (e) {
     ok(false, 'crashed: ' + e.stack);
   }

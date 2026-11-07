@@ -44,9 +44,9 @@
       bottle: { shape: "none" },
       notes: [],
     },
-    "tonka-45": {
-      name: "Tonka 45", brand: null, variant: null,
-      bottle: { shape: "slim", glass: "#a07a4b", cap: "#2a2a2a" },
+    "le-labo-tonka-25": {
+      name: "Tonka 25", brand: "Le Labo", variant: "Eau de Parfum", variantConfirmed: true,
+      bottle: { shape: "round", glass: "#dcd6c8", cap: "#6b6b6b" },
       notes: [],
     },
     "paco-invictus-victory": {
@@ -95,6 +95,21 @@
       bottle: { shape: "slim", glass: "#151515", cap: "#151515" },
       notes: ["Violet leaf", "Coriander", "Black pepper", "Rose", "Patchouli", "Vanilla", "Ambergris"],
     },
+    "paco-1-million": {
+      name: "1 Million", brand: "Paco Rabanne", variant: "Eau de Toilette", variantConfirmed: true,
+      bottle: { shape: "square", glass: "#c9a443", cap: "#a8842c" },
+      notes: [],
+    },
+    "versace-eros-parfum": {
+      name: "Eros", brand: "Versace", variant: "Parfum", variantConfirmed: true,
+      bottle: { shape: "square", glass: "#1f6f8b", cap: "#c8a24a" },
+      notes: [],
+    },
+    "nishane-ani": {
+      name: "Ani", brand: "Nishane", variant: "Extrait de Parfum", variantConfirmed: true,
+      bottle: { shape: "square", glass: "#e8e4da", cap: "#c9a24a" },
+      notes: [],
+    },
   };
 
   // Dates: { y, m? } with m 1-12. Month endpoints are inclusive.
@@ -104,10 +119,7 @@
       periods: [{ start: { y: 2017 }, end: { y: 2018 } }],
       memory: "High School" },
     { id: "h-black-orchid", fragrance: "tf-black-orchid",
-      periods: [
-        { start: { y: 2018, m: 8 }, end: { y: 2019, m: 5 } },
-        { start: { y: 2019, m: 8 }, end: { y: 2020, m: 5 } },
-      ],
+      periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
       memory: "Freshman Year of College",
       sourceNote: "Freshman Year of College (original life-stage note)" },
     { id: "h-red-tobacco", fragrance: "mancera-red-tobacco",
@@ -123,12 +135,11 @@
     { id: "h-tous-le-jours", fragrance: "amour-tous-le-jours",
       periods: [{ start: { y: 2020, m: 1 }, end: { y: 2020, m: 12 } }],
       memory: "Sophomore year of college, COVID" },
-    { id: "h-tonka-45", fragrance: "tonka-45",
-      periods: [{ start: { y: 2020 }, end: { y: 2020 } }],
-      memory: "During COVID",
-      sourceNote: "Corrected to during COVID. Shown at year precision." },
+    { id: "h-tonka-25", fragrance: "le-labo-tonka-25",
+      periods: [{ start: { y: 2021 }, end: { y: 2021 } }],
+      memory: "During COVID" },
     { id: "h-invictus-victory", fragrance: "paco-invictus-victory",
-      periods: [{ start: { y: 2022 }, end: { y: 2024 } }],
+      periods: [{ start: { y: 2022 }, end: { y: 2022 } }],
       memory: "Senior Year of College, 1st year post-college",
       sourceNote: "Senior Year of College, 1st year post-college (original note)" },
     { id: "h-phantom", fragrance: "paco-phantom",
@@ -147,6 +158,15 @@
       periods: [{ start: { y: 2026, m: 1 }, end: { y: 2026, m: 6 } }],
       memory: "Cairo Bullshit Trip; Year 3" },
 
+    { id: "h-1-million", fragrance: "paco-1-million",
+      periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
+      memory: null },
+    { id: "h-eros", fragrance: "versace-eros-parfum",
+      periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
+      memory: null },
+    { id: "h-ani", fragrance: "nishane-ani",
+      periods: [{ start: { y: 2022 }, end: { y: 2022 } }],
+      memory: null },
   ];
 
   // To try. Plain tiles. wearWith only adds a "Wear together with ..." note. Clicking Shop never writes history.

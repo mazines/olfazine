@@ -3,6 +3,7 @@
 //   key: FRAGELLA_API_KEY env var, or FRAGELLA_API_KEY=... in .env.local (git-ignored)
 //   node tools/fragella-fetch.mjs          # dry run: prints every request, sends nothing
 //   node tools/fragella-fetch.mjs --send   # GET fragrance data + terms/docs pages
+//   add --only=id1,id2 to look up just those catalog ids
 //   node tools/fragella-fetch.mjs --images # chosen bottles + note images from cdn.fragella.com
 //   node tools/fragella-fetch.mjs --build  # write mockups/shared/fragella-local.js
 //
@@ -29,6 +30,9 @@ function readKey() {
 const KEY = readKey();
 const PAGES = ['https://api.fragella.com/terms-of-use.html', 'https://api.fragella.com/docs.html'];
 const mode = process.argv.includes('--images') ? 'images' : process.argv.includes('--send') ? 'send' : 'dry';
+// --only id1,id2 limits the lookup to those catalog ids (saves monthly quota).
+const onlyArg = process.argv.find((a) => a.startsWith('--only='));
+const ONLY = onlyArg ? onlyArg.slice('--only='.length).split(',') : null;
 const DELAY_MS = 1200;
 
 // One source of truth: the mockup catalog. Skip synthetic examples and unresolved identities.
@@ -38,6 +42,7 @@ function catalog() {
   vm.runInContext(fs.readFileSync(path.join(project, 'mockups/shared/data.js'), 'utf8'), ctx);
   return Object.entries(ctx.window.OLF_DATA.catalog)
     .filter(([, f]) => !f.synthetic && !f.unresolved)
+    .filter(([id]) => !ONLY || ONLY.includes(id))
     .map(([id, f]) => {
       // Skip the brand when the name already starts with it ("Bentley for Men Intense").
       const brand = f.brand && !f.name.toLowerCase().startsWith(f.brand.toLowerCase()) ? f.brand : null;

@@ -9,12 +9,12 @@ mkdir -p "$out"
 concepts=("$@")
 (( ${#concepts} )) || concepts=(${(f)"$(cd $root && ls -d [0-9][0-9]*-* )"})
 
-enc_entry='%5Bdata-olf-entry%3D%222020%3Ah-black-orchid%22%5D'
+enc_entry='%5Bdata-olf-entry%3D%222020%3Ah-br540%22%5D'
 enc_owner='%5Bdata-olf-entry%3D%222019%3Ah-syn-nocturne%22%5D'
 enc_year='%5Bdata-olf-year%3D%222019%22%5D'
 typeset -A states
 states=(
-  history "view=history&year=2020&entry=h-black-orchid&scrollTo=$enc_entry"
+  history "view=history&year=2020&entry=h-br540&scrollTo=$enc_entry"
   try     "view=try&group=w-tuxedo"
   owner   "mode=owner&year=2019&entry=h-syn-nocturne&scrollTo=$enc_owner"
   redacted "year=2019&scrollTo=$enc_year"

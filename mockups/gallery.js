@@ -53,7 +53,7 @@
   ];
 
   const STATES = {
-    history: "view=history&year=2020&entry=h-black-orchid&scrollTo=" + encodeURIComponent('[data-olf-entry="2020:h-black-orchid"]'),
+    history: "view=history&year=2020&entry=h-br540&scrollTo=" + encodeURIComponent('[data-olf-entry="2020:h-br540"]'),
     try: "view=try&group=w-tuxedo",
     default: "",
   };
