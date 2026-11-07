@@ -15,7 +15,7 @@ for (const mode of ['public', 'owner']) {
   console.log('gaps', m.gaps.join(','));
   console.log('try', m.tryList.map(t => t.redacted ? `REDACTED(${t.kind})` : t.kind === 'group' ? t.title + ': ' + t.members.map(x => x.name).join(' + ') : t.fragrance.name).join(' | '));
   const yrs = m.years.map(y => y.year);
-  ok(JSON.stringify(yrs) === '[2026,2025,2024,2022,2021,2020,2019,2018,2017]', 'years newest first, no invented 2023');
+  ok(JSON.stringify(yrs) === '[2026,2025,2024,2022,2021,2020,2019,2018,2016,2015]', 'years newest first, no empty years');
   const bo = y => (m.years.find(x => x.year === y)?.entries || []).filter(e => !e.redacted && e.fragrance.name === 'Black Orchid').length;
   ok(bo(2019) === 1 && bo(2018) === 0 && bo(2020) === 0, 'Black Orchid only in 2019');
   const json = JSON.stringify(m);

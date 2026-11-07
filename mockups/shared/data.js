@@ -170,10 +170,10 @@
       memory: "Cairo Bullshit Trip; Year 3" },
 
     { id: "h-cool-water", fragrance: "davidoff-cool-water",
-      periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
+      periods: [{ start: { y: 2016 }, end: { y: 2016 } }],
       memory: null },
     { id: "h-1-million", fragrance: "paco-1-million",
-      periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
+      periods: [{ start: { y: 2015 }, end: { y: 2015 } }],
       memory: null },
     { id: "h-eros", fragrance: "versace-eros-parfum",
       periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
