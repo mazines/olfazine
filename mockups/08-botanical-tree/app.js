@@ -65,7 +65,7 @@
           '<span class="bt-name">' + esc(f.displayName) + "</span>" +
           (f.byline ? '<span class="bt-by">' + esc(f.byline) + "</span>" : "") +
           (state.mode === "owner" && e.private ? '<span class="bt-badges">' + O.badgesHTML(e) + "</span>" : "") +
-          (e.memory ? '<span class="bt-memo">' + esc(e.memory) + "</span>" : '<span class="bt-whens">' + e.periodsInYear.map(when).join("") + "</span>") +
+          (e.memory ? "" : '<span class="bt-whens">' + e.periodsInYear.map(when).join("") + "</span>") +
           (f.notes.length ? '<span class="bt-preview">' + esc(O.notePreview(f, 3)) + "</span>" : "") +
         "</span>" +
         '<span class="bt-sign" aria-hidden="true"></span>' +
