@@ -351,7 +351,7 @@
   // ---------- shared fragments ----------
   // Concepts may use these or write their own markup. Text rules stay the same.
   const REDACTED_LABEL = "REDACTED";
-  const REDACTED_HINT = "Private entry";
+  const REDACTED_HINT = "";
 
   function notesHTML(fr, opts) {
     opts = opts || {};
