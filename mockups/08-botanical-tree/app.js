@@ -39,7 +39,6 @@
     if (e.redacted) return redactedBranch();
     const f = e.fragrance, id = O.entryId(e.year, e.key), open = state.openEntry === id;
     const uncertain = e.periodsInYear.every(function (p) { return p.inYear === null; });
-    const others = e.allYears.filter(function (y) { return y !== e.year; });
     let sub = "";
     if (open) {
       sub = '<div class="bt-sub" id="e-' + O.slug(id) + '"><div class="bt-sub-grid">' +
@@ -48,13 +47,9 @@
           '<figure class="bt-fig">' + O.bottleArt(f, { width: 92, label: f.bottleLabel }) + "</figure>" +
           '<div class="bt-dbody">' +
             (state.mode === "owner" ? '<div class="bt-badges">' + O.badgesHTML(e) + "</div>" : "") +
-            '<h4 class="bt-sc">Worn</h4><ul class="bt-plist">' + e.periods.map(function (p) {
-              return p.inYear === null
-                ? '<li class="bt-p-year">' + esc(p.longText) + ' <span class="bt-q">month not recorded</span></li>'
-                : "<li>" + esc(p.longText) + "</li>";
-            }).join("") + "</ul>" +
-            (others.length ? '<p class="bt-also">Also grows from ' + others.join(", ") + ".</p>" : "") +
-            '<h4 class="bt-sc">Memory</h4>' + (e.memory ? '<p class="bt-memory">' + esc(e.memory) + "</p>" : '<p class="olf-empty">No memory recorded.</p>') +
+            (e.memory
+              ? '<h4 class="bt-sc">Memory</h4><p class="bt-memory">' + esc(e.memory) + "</p>"
+              : '<h4 class="bt-sc">Worn</h4><ul class="bt-plist">' + e.periods.map(function (p) { return "<li>" + esc(p.longText) + "</li>"; }).join("") + "</ul>") +
             (e.sourceNote ? '<p class="bt-also">Source wording (owner only): ' + esc(e.sourceNote) + "</p>" : "") +
             '<div class="bt-links">' + O.linksHTML(f) + "</div>" +
             (state.mode === "owner" ? '<div class="bt-owner">' + O.editButton("Edit entry") + "</div>" : "") +
@@ -70,7 +65,7 @@
           '<span class="bt-name">' + esc(f.displayName) + "</span>" +
           (f.byline ? '<span class="bt-by">' + esc(f.byline) + "</span>" : "") +
           (state.mode === "owner" && e.private ? '<span class="bt-badges">' + O.badgesHTML(e) + "</span>" : "") +
-          '<span class="bt-whens">' + e.periodsInYear.map(when).join("") + "</span>" +
+          (e.memory ? '<span class="bt-memo">' + esc(e.memory) + "</span>" : '<span class="bt-whens">' + e.periodsInYear.map(when).join("") + "</span>") +
           (f.notes.length ? '<span class="bt-preview">' + esc(O.notePreview(f, 3)) + "</span>" : "") +
         "</span>" +
         '<span class="bt-sign" aria-hidden="true"></span>' +

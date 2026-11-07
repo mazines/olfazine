@@ -51,14 +51,13 @@
           '<span class="bh-name">' + esc(f.displayName) + "</span>" +
           (f.byline ? '<span class="bt-by">' + esc(f.byline) + "</span>" : "") +
           (state.mode === "owner" && e.private ? '<span class="bt-badges">' + O.badgesHTML(e) + "</span>" : "") +
-          '<span class="bh-whens">' + e.periodsInYear.map(when).join("") + "</span>" +
+          (e.memory ? '<span class="bh-memo">' + esc(e.memory) + "</span>" : '<span class="bh-whens">' + e.periodsInYear.map(when).join("") + "</span>") +
         "</span>" +
       "</button></li>";
   }
 
   function panel(e, state) {
     const f = e.fragrance, id = O.entryId(e.year, e.key);
-    const others = e.allYears.filter(function (y) { return y !== e.year; });
     return '<section class="bh-panel" id="e-' + O.slug(id) + '" data-col="' + e.year + '" aria-label="' + esc(f.displayName) + ' details">' +
       '<div class="bh-panel-head"><span class="bh-panel-name">' + esc(f.displayName) + "</span>" +
         (f.byline ? '<span class="bt-by">' + esc(f.byline) + "</span>" : "") +
@@ -67,15 +66,9 @@
       leafLine(f) +
       '<div class="bh-panel-body">' +
         '<figure class="bt-fig">' + O.bottleArt(f, { width: 96, label: f.bottleLabel }) + "</figure>" +
-        '<div class="bh-col"><h4 class="bt-sc bh-h">Worn</h4><ul class="bt-plist">' + e.periods.map(function (p) {
-            return p.inYear === null
-              ? '<li class="bt-p-year">' + esc(p.longText) + ' <span class="bt-q">month not recorded</span></li>'
-              : "<li>" + esc(p.longText) + "</li>";
-          }).join("") + "</ul>" +
-          (others.length ? '<p class="bt-also">Also grows from ' + others.join(", ") + ".</p>" : "") +
-        "</div>" +
-        '<div class="bh-col"><h4 class="bt-sc bh-h">Memory</h4>' +
-          (e.memory ? '<p class="bt-memory">' + esc(e.memory) + "</p>" : '<p class="olf-empty">No memory recorded.</p>') +
+        '<div class="bh-col bh-col-wide">' + (e.memory
+          ? '<h4 class="bt-sc bh-h">Memory</h4><p class="bt-memory">' + esc(e.memory) + "</p>"
+          : '<h4 class="bt-sc bh-h">Worn</h4><ul class="bt-plist">' + e.periods.map(function (p) { return "<li>" + esc(p.longText) + "</li>"; }).join("") + "</ul>") +
           (e.sourceNote ? '<p class="bt-also">Source wording (owner only): ' + esc(e.sourceNote) + "</p>" : "") +
         "</div>" +
         '<div class="bh-col">' + O.linksHTML(f) + (state.mode === "owner" ? '<div class="bt-owner">' + O.editButton("Edit entry") + "</div>" : "") + "</div>" +

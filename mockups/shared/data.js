@@ -105,6 +105,12 @@
       bottle: { shape: "square", glass: "#1f6f8b", cap: "#c8a24a" },
       notes: [],
     },
+    "ard-al-zaafaran-oudi": {
+      name: "Oudi", brand: "Ard Al Zaafaran", variant: "Eau de Parfum", variantConfirmed: true,
+      shopUrl: "https://modestycollection.com.au/products/oudi-perfume",
+      bottle: { shape: "square", glass: "#7a2a22", cap: "#1a1a1a" },
+      notes: [],
+    },
     "nishane-ani": {
       name: "Ani", brand: "Nishane", variant: "Extrait de Parfum", variantConfirmed: true,
       bottle: { shape: "square", glass: "#e8e4da", cap: "#c9a24a" },
@@ -162,6 +168,9 @@
       periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
       memory: null },
     { id: "h-eros", fragrance: "versace-eros-parfum",
+      periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
+      memory: null },
+    { id: "h-oudi", fragrance: "ard-al-zaafaran-oudi",
       periods: [{ start: { y: 2019 }, end: { y: 2019 } }],
       memory: null },
     { id: "h-ani", fragrance: "nishane-ani",

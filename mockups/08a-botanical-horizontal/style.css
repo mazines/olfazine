@@ -141,3 +141,6 @@ button.bh-twig-btn:hover .bh-name { text-decoration: underline; text-decoration-
   .bh-twig-redacted .bh-name { letter-spacing: .04em; font-size: 12px; }
   .bh-year-num { font-size: 26px; }
 }
+
+/* memory stands in for dates on a collapsed entry */
+.bh-memo { font-style: italic; font-size: 15px; line-height: 1.35; color: var(--olf-fg); }

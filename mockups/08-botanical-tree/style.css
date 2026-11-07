@@ -218,3 +218,6 @@ button.bt-branch-btn:hover .bt-name { text-decoration: underline; text-decoratio
 
 /* "wear together" is a note on a plain tile */
 .bt-wear { color: var(--sepia); font-style: italic; font-size: 15px; }
+
+/* memory stands in for dates on a collapsed entry */
+.bt-memo { font-style: italic; font-size: 15px; line-height: 1.35; color: var(--olf-fg); }

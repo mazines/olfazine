@@ -94,8 +94,8 @@
     if (f.unresolved || f.synthetic) return [];
     const q = encodeURIComponent(shopQuery(f));
     const out = [
-      { kind: "shop", label: "Shop", detail: "Google Shopping search", search: true,
-        href: "https://www.google.com/search?tbm=shop&q=" + q },
+      { kind: "shop", label: "Shop", detail: f.shopUrl ? "Product page" : "Google Shopping search", search: !f.shopUrl,
+        href: f.shopUrl || "https://www.google.com/search?tbm=shop&q=" + q },
       { kind: "reference", label: "Fragrantica", detail: "Search, profile not verified", search: true,
         href: "https://www.fragrantica.com/search/?query=" + q },
     ];
