@@ -95,6 +95,11 @@
       bottle: { shape: "slim", glass: "#151515", cap: "#151515" },
       notes: ["Violet leaf", "Coriander", "Black pepper", "Rose", "Patchouli", "Vanilla", "Ambergris"],
     },
+    "davidoff-cool-water": {
+      name: "Cool Water", brand: "Davidoff", variant: null,
+      bottle: { shape: "square", glass: "#2f7fb0", cap: "#c9d4dc" },
+      notes: [],
+    },
     "paco-1-million": {
       name: "1 Million", brand: "Paco Rabanne", variant: "Eau de Toilette", variantConfirmed: true,
       bottle: { shape: "square", glass: "#c9a443", cap: "#a8842c" },
@@ -164,6 +169,9 @@
       periods: [{ start: { y: 2026, m: 1 }, end: { y: 2026, m: 6 } }],
       memory: "Cairo Bullshit Trip; Year 3" },
 
+    { id: "h-cool-water", fragrance: "davidoff-cool-water",
+      periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
+      memory: null },
     { id: "h-1-million", fragrance: "paco-1-million",
       periods: [{ start: { y: 2017 }, end: { y: 2017 } }],
       memory: null },
